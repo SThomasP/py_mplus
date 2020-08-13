@@ -1,3 +1,6 @@
 .idea/
 manga_plus.zip
 tests/urls.py
+build/
+dist/
+src/*.egg-info/

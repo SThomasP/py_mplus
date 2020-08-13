@@ -1,7 +1,7 @@
 import unittest
 from tests import urls
 import requests
-from mplus import parse, HEADER
+from py_mplus import parse, HEADER
 
 
 class ChapterTests(unittest.TestCase):
