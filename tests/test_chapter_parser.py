@@ -28,15 +28,22 @@ class ChapterTests(unittest.TestCase):
         self.assertTrue(hasattr(manga_viewer.pages[55], 'advertisement'))
         self.assertFalse(hasattr(manga_viewer, 'is_vertical_only'))
 
-    def test_bc_23(self):
-        bc_23 = self.get(urls.BC_23)
-        manga_viewer = self.get_chapter_view(bc_23)
+    def test_bc_26(self):
+        bc_26 = self.get(urls.BC_26)
+        manga_viewer = self.get_chapter_view(bc_26)
         self.assertEqual('Beast Children', manga_viewer.title_name)
-        self.assertEqual('#023', manga_viewer.chapter_name)
+        self.assertEqual('#026', manga_viewer.chapter_name)
         self.assertEqual(21, len(manga_viewer.pages))
         self.assertTrue(hasattr(manga_viewer.pages[12], 'manga_page'))
         self.assertTrue(hasattr(manga_viewer.pages[19], 'advertisement'))
         self.assertTrue(hasattr(manga_viewer.pages[20], 'last_page'))
         last_page = manga_viewer.pages[20].last_page
-        self.assertEqual('#024', last_page.next_chapter.name)
+        self.assertEqual('#027', last_page.next_chapter.name)
         self.assertEqual(5, len(last_page.top_comments))
+
+    def test_soloist_11(self):
+        soloist = self.get(urls.SOLOIST_11)
+        manga_viewer = self.get_chapter_view(soloist)
+        self.assertEqual('Soloist in A Cage', manga_viewer.title_name)
+        self.assertEqual('#011', manga_viewer.chapter_name)
+        self.assertEqual(58, len(manga_viewer.pages))

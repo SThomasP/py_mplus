@@ -30,6 +30,8 @@ class MangaViewer(MPObject):
             self.title_id = buffer.uint32()
         elif a == 10:
             self.start_from_right = buffer.boolean()
+        elif a == 11:
+            self.region_code = buffer.string()
         else:
             buffer.skip_type(7 & a)
 
