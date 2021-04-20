@@ -3,7 +3,7 @@ RESPONSES = ['QUESTION', 'ANSWER']
 
 
 class Feedback(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.time_stamp = buffer.uint32()
         elif a == 2:
@@ -11,7 +11,7 @@ class Feedback(MPObject):
         elif a == 3:
             self.response_type = buffer.int32()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

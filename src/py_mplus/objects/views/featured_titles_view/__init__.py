@@ -4,7 +4,7 @@ from py_mplus.objects.views.featured_titles_view.contents import Contents
 
 
 class FeaturedTitlesView(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.main_banner = Banner(buffer, buffer.uint32())
         elif a == 2:
@@ -16,7 +16,7 @@ class FeaturedTitlesView(MPObject):
                 self.contents = []
             self.contents.append(Contents(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

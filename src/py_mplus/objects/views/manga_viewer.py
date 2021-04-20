@@ -5,7 +5,7 @@ from py_mplus.objects.external.sns import SNS
 
 
 class MangaViewer(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             if not hasattr(self, 'pages'):
                 self.pages = []
@@ -33,7 +33,7 @@ class MangaViewer(MPObject):
         elif a == 11:
             self.region_code = buffer.string()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
 e.decode = function (e, t) {

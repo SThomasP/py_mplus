@@ -4,7 +4,7 @@ LANGUAGES = ['ENGLISH', 'SPANISH']
 
 
 class Title(MPObject):
-    def _decode(self, buffer, a):
+    def _decode(self, buffer, a, i):
         if a == 1:
             self.title_id = buffer.uint32()
         elif a == 2:
@@ -20,7 +20,7 @@ class Title(MPObject):
         elif a == 7:
             self.language = buffer.int32()  # end date
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
 e.decode = function (e, t) {

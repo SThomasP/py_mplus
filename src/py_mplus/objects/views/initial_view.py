@@ -2,7 +2,7 @@ from py_mplus.objects import MPObject, MPData
 
 
 class InitialView(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.gdpr_agreement_required = buffer.boolean()
         elif a == 2:
@@ -10,7 +10,7 @@ class InitialView(MPObject):
         elif a == 3:
             self.spanish_titles_count = buffer.uint32()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

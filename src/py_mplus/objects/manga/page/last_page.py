@@ -11,7 +11,7 @@ CHAPTER_TYPES = ['LATEST', 'SEQUENCE', 'NO SEQUENCE']
 
 
 class LastPage(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.current_chapter = Chapter(buffer, buffer.uint32())
         elif a == 2:
@@ -45,7 +45,7 @@ class LastPage(MPObject):
         elif a == 13:
             self.is_next_chapter_read_by_ticket = buffer.boolean()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
       switch (i >>> 3) {

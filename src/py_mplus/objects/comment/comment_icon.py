@@ -2,13 +2,13 @@ from py_mplus.objects import MPData, MPObject
 
 
 class CommentIcon(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.id = buffer.uint32()
         elif a == 2:
             self.image_url = buffer.string()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

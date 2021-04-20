@@ -3,7 +3,7 @@ from py_mplus.objects.comment import Comment
 
 
 class CommentListView(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             if not hasattr(self, 'comments'):
                 self.comments = []
@@ -11,7 +11,7 @@ class CommentListView(MPObject):
         elif a == 2:
             self.is_set_username = buffer.boolean()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

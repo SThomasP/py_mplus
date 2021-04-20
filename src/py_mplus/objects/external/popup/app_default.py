@@ -3,13 +3,13 @@ from py_mplus.objects.external.transition_action import TransitionAction
 
 
 class AppDefault(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.image_url = buffer.string()
         elif a == 2:
             self.action = TransitionAction(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

@@ -2,7 +2,7 @@ from py_mplus.objects import MPObject, MPData
 
 
 class ServiceAnnouncement(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.title = buffer.string()
         elif a == 2:
@@ -10,7 +10,7 @@ class ServiceAnnouncement(MPObject):
         elif a == 3:
             self.date = buffer.int32()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

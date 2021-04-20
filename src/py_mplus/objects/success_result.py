@@ -19,7 +19,7 @@ from py_mplus.objects.views.web_home_view import WebHomeView
 
 
 class SuccessResult(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.is_featured_update = buffer.boolean()
         elif a == 2:
@@ -55,7 +55,7 @@ class SuccessResult(MPObject):
         elif a == 17:
             self.feedback_view = FeedbackView(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

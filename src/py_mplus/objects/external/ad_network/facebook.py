@@ -2,11 +2,11 @@ from py_mplus.objects import MPObject, MPData
 
 
 class Facebook(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.placement_id = buffer.string()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

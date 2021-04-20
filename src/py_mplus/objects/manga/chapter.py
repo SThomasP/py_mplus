@@ -2,7 +2,7 @@ from py_mplus.objects import MPObject
 
 
 class Chapter(MPObject):
-    def _decode(self, buffer, a):
+    def _decode(self, buffer, a, i):
         if a == 1:
             self.title_id = buffer.uint32()
         elif a == 2:
@@ -22,7 +22,7 @@ class Chapter(MPObject):
         elif a == 9:
             self.is_vertical_only = buffer.boolean()  # is vertical only
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 

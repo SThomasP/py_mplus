@@ -3,7 +3,7 @@ from py_mplus.objects.comment.comment_icon import CommentIcon
 
 
 class ProfileSettingsView(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             if not hasattr(self, 'icon_list'):
                 self.icon_list = []
@@ -13,7 +13,7 @@ class ProfileSettingsView(MPObject):
         elif a == 3:
             self.my_icon = CommentIcon(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

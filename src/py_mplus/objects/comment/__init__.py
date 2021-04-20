@@ -2,7 +2,7 @@ from py_mplus.objects import MPObject, MPData
 
 
 class Comment(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.id = buffer.uint32()
         elif a == 2:
@@ -22,7 +22,7 @@ class Comment(MPObject):
         elif a == 11:
             self.created = buffer.uint32()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 

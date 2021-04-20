@@ -3,7 +3,7 @@ from py_mplus.objects.manga.title.updated_title import UpdatedTitle
 
 
 class UpdatedTitleGroup(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.group_name = buffer.string()
         elif a == 2:
@@ -11,7 +11,7 @@ class UpdatedTitleGroup(MPObject):
                 self.titles = []
             self.titles.append(UpdatedTitle(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

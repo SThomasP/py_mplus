@@ -3,7 +3,7 @@ from py_mplus.objects.external.popup.button import Button
 
 
 class OSDefault(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.subject = buffer.string()
         elif a == 2:
@@ -15,7 +15,7 @@ class OSDefault(MPObject):
         elif a == 5:
             self.cancel_button = Button(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
     e.decode = function (e, t) {

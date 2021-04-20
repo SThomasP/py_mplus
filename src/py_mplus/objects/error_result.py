@@ -5,7 +5,7 @@ ACTIONS = ['DEFAULT', 'MAINTENANCE', 'UNAUTHORIZED', 'GEO-IP BLOCKED']
 
 
 class ErrorResult(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.action = buffer.int32()
         elif a == 2:
@@ -15,7 +15,7 @@ class ErrorResult(MPObject):
         elif a == 4:
             self.debug_info = buffer.string()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

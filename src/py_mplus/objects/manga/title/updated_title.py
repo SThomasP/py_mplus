@@ -3,7 +3,7 @@ from py_mplus.objects.manga.title import Title
 
 
 class UpdatedTitle(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.title = Title(buffer, buffer.uint32())
         elif a == 2:
@@ -17,7 +17,7 @@ class UpdatedTitle(MPObject):
         elif a == 6:
             self.is_vertical_only = buffer.boolean()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

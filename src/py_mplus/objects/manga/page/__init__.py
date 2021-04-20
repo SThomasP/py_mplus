@@ -6,7 +6,7 @@ from py_mplus.objects.manga.page.manga_page import MangaPage
 
 
 class Page(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.manga_page = MangaPage(buffer, buffer.uint32())
         elif a == 2:
@@ -16,7 +16,7 @@ class Page(MPObject):
         elif a == 4:
             self.advertisement = AdNetworkList(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

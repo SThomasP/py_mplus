@@ -56,7 +56,7 @@ class MPData:
         return t.decode('utf-8')
 
     def skip(self, n=None):
-        if n is int:
+        if type(n) == int:
             self.pos += n
         else:
             while (128 & self.buffer[self.pos]) > 0:
@@ -83,11 +83,12 @@ class MPObject:
         n = buffer.pos + t
         if n <= len(buffer):
             while buffer.pos < n:
-                a = rshift(buffer.uint32(), 3)
-                self._decode(buffer, a)
+                i = buffer.uint32()
+                a = rshift(i, 3)
+                self._decode(buffer, a, i)
 
     @abstractmethod
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         pass
 
 

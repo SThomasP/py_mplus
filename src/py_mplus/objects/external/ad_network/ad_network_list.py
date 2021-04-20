@@ -3,13 +3,13 @@ from py_mplus.objects.external.ad_network import AdNetwork
 
 
 class AdNetworkList(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             if not hasattr(self, 'ad_networks'):
                 self.ad_networks = []
             self.ad_networks.append(AdNetwork(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

@@ -4,7 +4,7 @@ TYPES = ['SINGLE', 'LEFT', 'RIGHT', 'DOUBLE']
 
 
 class MangaPage(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.image = buffer.string()
         elif a == 2:
@@ -16,7 +16,7 @@ class MangaPage(MPObject):
         elif a == 5:
             self.encryption_key = buffer.string()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

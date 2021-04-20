@@ -3,7 +3,7 @@ from py_mplus.objects.external.transition_action import TransitionAction
 
 
 class Banner(MPObject):
-    def _decode(self, buffer, a):
+    def _decode(self, buffer, a, i):
         if a == 1:
             self.image = buffer.string()
         elif a == 2:
@@ -11,7 +11,7 @@ class Banner(MPObject):
         elif a == 3:
             self.id = buffer.uint32()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 '''
   e.decode = function (e, t) {

@@ -3,7 +3,7 @@ from py_mplus.objects.comment.comment_icon import CommentIcon
 
 
 class SettingsView(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             self.my_icon = CommentIcon(buffer, buffer.uint32())
         elif a == 2:
@@ -17,7 +17,7 @@ class SettingsView(MPObject):
         elif a == 6:
             self.spanish_titles_count = buffer.uint32()
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''

@@ -3,13 +3,13 @@ from py_mplus.objects.user.feedback import Feedback
 
 
 class FeedbackView(MPObject):
-    def _decode(self, buffer: MPData, a):
+    def _decode(self, buffer: MPData, a, i):
         if a == 1:
             if not hasattr(self, 'feedback_list'):
                 self.feedback_list = []
             self.feedback_list.append(Feedback(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & a)
+            buffer.skip_type(7 & i)
 
 
 '''
