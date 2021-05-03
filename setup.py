@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="py_mplus",
-    version="0.0.3",
+    version="0.0.4",
     author="Steffan Padel",
     author_email="git@steffanpadel.eu",
     description="Python data bindings for mangaplus",
