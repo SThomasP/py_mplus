@@ -46,7 +46,7 @@ class MPData:
         t = self.uint32()
         e = self.pos
         n = self.pos + t
-        if n < len(self):
+        if n <= len(self):
             self.pos += t
             return bytes(self.buffer[e: n])
         return b''
