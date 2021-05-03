@@ -5,19 +5,19 @@ from py_mplus.objects.manga.title.updated_title_group import UpdatedTitleGroup
 
 
 class HomeView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             if not hasattr(self, 'top_banners'):
                 self.top_banners = []
             self.top_banners.append(Banner(buffer, buffer.uint32()))
-        elif a == 2:
+        elif category == 2:
             if not hasattr(self, 'groups'):
                 self.groups = []
             self.groups.append(UpdatedTitleGroup(buffer, buffer.uint32()))
-        elif a == 9:
+        elif category == 9:
             self.popup = Popup(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''  e.decode = function (e, t) {
     e instanceof x || (e = x.create(e));

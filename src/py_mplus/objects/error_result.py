@@ -5,17 +5,17 @@ ACTIONS = ['DEFAULT', 'MAINTENANCE', 'UNAUTHORIZED', 'GEO-IP BLOCKED']
 
 
 class ErrorResult(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.action = buffer.int32()
-        elif a == 2:
+        elif category == 2:
             self.english_popup = OSDefault(buffer, buffer.uint32())
-        elif a == 3:
+        elif category == 3:
             self.spanish_popup = OSDefault(buffer, buffer.uint32())
-        elif a == 4:
+        elif category == 4:
             self.debug_info = buffer.string()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

@@ -2,27 +2,27 @@ from py_mplus.objects import MPObject, MPData
 
 
 class Comment(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.id = buffer.uint32()
-        elif a == 2:
+        elif category == 2:
             self.index = buffer.uint32()
-        elif a == 3:
+        elif category == 3:
             self.username = buffer.string()
-        elif a == 4:
+        elif category == 4:
             self.icon_url = buffer.string()
-        elif a == 6:
+        elif category == 6:
             self.is_my_comment = buffer.boolean()
-        elif a == 7:
+        elif category == 7:
             self.already_liked = buffer.boolean()
-        elif a == 9:
+        elif category == 9:
             self.number_of_likes = buffer.uint32()
-        elif a == 10:
+        elif category == 10:
             self.body = buffer.string()
-        elif a == 11:
+        elif category == 11:
             self.created = buffer.uint32()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 

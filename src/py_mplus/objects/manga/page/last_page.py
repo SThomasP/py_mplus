@@ -11,41 +11,41 @@ CHAPTER_TYPES = ['LATEST', 'SEQUENCE', 'NO SEQUENCE']
 
 
 class LastPage(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.current_chapter = Chapter(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.next_chapter = Chapter(buffer, buffer.uint32())
-        elif a == 3:
+        elif category == 3:
             if not hasattr(self, 'top_comments'):
                 self.top_comments = []
             self.top_comments.append(Comment(buffer, buffer.uint32()))
-        elif a == 4:
+        elif category == 4:
             self.subscribed = buffer.boolean()
-        elif a == 5:
+        elif category == 5:
             self.next_time_stamp = buffer.uint32()
-        elif a == 6:
+        elif category == 6:
             self.chapter_type = buffer.int32()
-        elif a == 7:
+        elif category == 7:
             self.advertisement = AdNetwork(buffer, buffer.uint32())
-        elif a == 8:
+        elif category == 8:
             self.movieReward = Popup(buffer, buffer.uint32())
-        elif a == 9:
+        elif category == 9:
             if not hasattr(self, 'banners'):
                 self.banners = []
             self.banners.append(Banner(buffer, buffer.uint32()))
-        elif a == 10:
+        elif category == 10:
             if not hasattr(self, 'ticket_titles'):
                 self.ticket_titles = []
             self.ticket_titles.append(Title(buffer, buffer.uint32()))
-        elif a == 11:
+        elif category == 11:
             self.publisher_banner = Banner(buffer, buffer.uint32())
-        elif a == 12:
+        elif category == 12:
             self.user_ticket = UserTickets(buffer, buffer.uint32())
-        elif a == 13:
+        elif category == 13:
             self.is_next_chapter_read_by_ticket = buffer.boolean()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
       switch (i >>> 3) {

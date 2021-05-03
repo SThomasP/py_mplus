@@ -4,13 +4,13 @@ from py_mplus.objects.success_result import SuccessResult
 
 
 class Response(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.success = SuccessResult(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.error = ErrorResult(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

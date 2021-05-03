@@ -4,19 +4,19 @@ from py_mplus.objects.views.featured_titles_view.contents import Contents
 
 
 class FeaturedTitlesView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.main_banner = Banner(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.sub_banner_one = Banner(buffer, buffer.uint32())
-        elif a == 3:
+        elif category == 3:
             self.sub_banner_two = Banner(buffer, buffer.uint32())
-        elif a == 4:
+        elif category == 4:
             if not hasattr(self, 'contents'):
                 self.contents = []
             self.contents.append(Contents(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
   e.decode = function (e, t) {

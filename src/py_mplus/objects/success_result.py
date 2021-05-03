@@ -19,43 +19,43 @@ from py_mplus.objects.views.web_home_view import WebHomeView
 
 
 class SuccessResult(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.is_featured_update = buffer.boolean()
-        elif a == 2:
+        elif category == 2:
             self.registration_data = RegistrationData(buffer, buffer.uint32())
-        elif a == 3:
+        elif category == 3:
             self.home_view = HomeView(buffer, buffer.uint32())
-        elif a == 4:
+        elif category == 4:
             self.featured_titles_view = FeaturedTitlesView(buffer, buffer.uint32())
-        elif a == 5:
+        elif category == 5:
             self.all_titles_view = AllTitlesView(buffer, buffer.uint32())
-        elif a == 6:
+        elif category == 6:
             self.title_ranking_view = TitleRankingView(buffer, buffer.uint32())
-        elif a == 7:
+        elif category == 7:
             self.subscribed_titles_view = SubscribedTitlesView(buffer, buffer.uint32())
-        elif a == 8:
+        elif category == 8:
             self.title_detail_view = TitleDetailView(buffer, buffer.uint32())
-        elif a == 9:
+        elif category == 9:
             self.comment_list_view = CommentListView(buffer, buffer.uint32())
-        elif a == 10:
+        elif category == 10:
             self.manga_viewer = MangaViewer(buffer, buffer.uint32())
-        elif a == 11:
+        elif category == 11:
             self.web_home_view = WebHomeView(buffer, buffer.uint32())
-        elif a == 12:
+        elif category == 12:
             self.settings_view = SettingsView(buffer, buffer.uint32())
-        elif a == 13:
+        elif category == 13:
             self.profile_settings_view = ProfileSettingsView(buffer, buffer.uint32())
-        elif a == 14:
+        elif category == 14:
             self.update_profile_results_view = UpdateProfileResultsView(buffer, buffer.uint32())
-        elif a == 15:
+        elif category == 15:
             self.service_announcements_view = ServiceAnnouncementsView(buffer, buffer.uint32())
-        elif a == 16:
+        elif category == 16:
             self.initial_view = InitialView(buffer, buffer.uint32())
-        elif a == 17:
+        elif category == 17:
             self.feedback_view = FeedbackView(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

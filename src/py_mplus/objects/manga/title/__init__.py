@@ -4,23 +4,23 @@ LANGUAGES = ['ENGLISH', 'SPANISH']
 
 
 class Title(MPObject):
-    def _decode(self, buffer, a, i):
-        if a == 1:
+    def _decode(self, buffer, category, skip):
+        if category == 1:
             self.title_id = buffer.uint32()
-        elif a == 2:
+        elif category == 2:
             self.name = buffer.string()
-        elif a == 3:
+        elif category == 3:
             self.author = buffer.string()
-        elif a == 4:
+        elif category == 4:
             self.portrait_image = buffer.string()  # subtitle
-        elif a == 5:
+        elif category == 5:
             self.landscape_image = buffer.string()  # thumbnail
-        elif a == 6:
+        elif category == 6:
             self.view_count = buffer.uint32()
-        elif a == 7:
+        elif category == 7:
             self.language = buffer.int32()  # end date
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
 e.decode = function (e, t) {

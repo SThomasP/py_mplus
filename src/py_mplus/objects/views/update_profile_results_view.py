@@ -3,11 +3,11 @@ RESULTS = ['SUCCESS', 'DUPLICATED', 'NG_WORD']
 
 
 class UpdateProfileResultsView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.result = buffer.int32()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
  e.decode = function (e, t) {

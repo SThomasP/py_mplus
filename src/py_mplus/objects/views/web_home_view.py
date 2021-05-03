@@ -5,21 +5,21 @@ from py_mplus.objects.manga.title.updated_title_group import UpdatedTitleGroup
 
 
 class WebHomeView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             if not hasattr(self, 'top_banners'):
                 self.top_banners = []
             self.top_banners.append(Banner(buffer, buffer.uint32()))
-        elif a == 2:
+        elif category == 2:
             if not hasattr(self, 'groups'):
                 self.groups = []
             self.groups.append(UpdatedTitleGroup(buffer, buffer.uint32()))
-        elif a == 3:
+        elif category == 3:
             if not hasattr(self, 'ranking'):
                 self.ranking = []
             self.ranking.append(Title(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

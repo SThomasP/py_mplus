@@ -4,19 +4,19 @@ TYPES = ['SINGLE', 'LEFT', 'RIGHT', 'DOUBLE']
 
 
 class MangaPage(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.image = buffer.string()
-        elif a == 2:
+        elif category == 2:
             self.width = buffer.uint32()
-        elif a == 3:
+        elif category == 3:
             self.height = buffer.uint32()
-        elif a == 4:
+        elif category == 4:
             self.type = buffer.int32()
-        elif a == 5:
+        elif category == 5:
             self.encryption_key = buffer.string()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

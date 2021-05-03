@@ -3,21 +3,21 @@ from py_mplus.objects.manga.title import Title
 
 
 class UpdatedTitle(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.title = Title(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.chapter_id = buffer.uint32()
-        elif a == 3:
+        elif category == 3:
             self.chapter_name = buffer.string()
-        elif a == 4:
+        elif category == 4:
             self.chapter_sub_title = buffer.string()
-        elif a == 5:
+        elif category == 5:
             self.is_latest = buffer.boolean()
-        elif a == 6:
+        elif category == 6:
             self.is_vertical_only = buffer.boolean()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

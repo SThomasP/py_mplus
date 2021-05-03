@@ -3,13 +3,13 @@ from py_mplus.objects.external.service_announcement import ServiceAnnouncement
 
 
 class ServiceAnnouncementsView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             if not hasattr(self, 'service_announcements'):
                 self.service_announcements = []
             self.service_announcements.append(ServiceAnnouncement(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

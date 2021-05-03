@@ -4,23 +4,23 @@ from py_mplus.objects.external.transition_action import TransitionAction
 
 
 class PublisherNews(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.id = buffer.uint32()
-        elif a == 2:
+        elif category == 2:
             self.publisher_id = buffer.uint32()
-        elif a == 3:
+        elif category == 3:
             self.publisher_name = buffer.string()
-        elif a == 4:
+        elif category == 4:
             self.subject = buffer.string()
-        elif a == 5:
+        elif category == 5:
             self.body = buffer.string()
-        elif a == 6:
+        elif category == 6:
             self.published_time_stamp = buffer.uint32()
-        elif a == 7:
+        elif category == 7:
             self.action = TransitionAction(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 '''
     e.decode = function (e, t) {
       e instanceof p || (e = p.create(e));

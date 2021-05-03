@@ -3,13 +3,13 @@ from py_mplus.objects.manga.title import Title
 
 
 class TitleRankingView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             if not hasattr(self, 'titles'):
                 self.titles = []
             self.titles.append(Title(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

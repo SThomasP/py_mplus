@@ -2,27 +2,27 @@ from py_mplus.objects import MPObject
 
 
 class Chapter(MPObject):
-    def _decode(self, buffer, a, i):
-        if a == 1:
+    def _decode(self, buffer, category, skip):
+        if category == 1:
             self.title_id = buffer.uint32()
-        elif a == 2:
+        elif category == 2:
             self.chapter_id = buffer.uint32()
-        elif a == 3:
+        elif category == 3:
             self.name = buffer.string()
-        elif a == 4:
+        elif category == 4:
             self.subtitle = buffer.string()  # subtitle
-        elif a == 5:
+        elif category == 5:
             self.thumbnail = buffer.string()  # thumbnail
-        elif a == 6:
+        elif category == 6:
             self.start_date = buffer.uint32()
-        elif a == 7:
+        elif category == 7:
             self.end_date = buffer.uint32()  # end date
-        elif a == 8:
+        elif category == 8:
             self.already_seen = buffer.boolean()  # already viewed
-        elif a == 9:
+        elif category == 9:
             self.is_vertical_only = buffer.boolean()  # is vertical only
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 

@@ -4,13 +4,13 @@ from py_mplus.objects.manga.title.title_list import TitleList
 
 
 class Contents(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.banner = Banner(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.title_list = TitleList(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

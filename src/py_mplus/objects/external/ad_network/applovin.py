@@ -2,11 +2,11 @@ from py_mplus.objects import MPObject, MPData
 
 
 class AppLoving(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.unit_id = buffer.string()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
     while (e.pos < n) {

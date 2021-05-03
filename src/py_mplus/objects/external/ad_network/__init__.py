@@ -8,19 +8,19 @@ from py_mplus.objects.external.ad_network.mopub import Mopub
 
 
 class AdNetwork(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.facebook = Facebook(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.admob = Admob(buffer, buffer.uint32())
-        elif a == 3:
+        elif category == 3:
             self.mopub = Mopub(buffer, buffer.uint32())
-        elif a == 4:
+        elif category == 4:
             self.adsense = Adsense(buffer, buffer.uint32())
-        elif a == 5:
+        elif category == 5:
             self.applovin = AppLoving(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
   r = new m.Proto.AdNetwork;

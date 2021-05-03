@@ -5,13 +5,13 @@ from py_mplus.objects.views.title_detail_view.publisher_news import PublisherNew
 
 
 class PublisherItem(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.banner = Banner(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.publisher_news = PublisherNews(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

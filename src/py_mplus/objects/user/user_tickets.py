@@ -3,13 +3,13 @@ from py_mplus.objects import MPObject
 
 
 class UserTickets(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.current_ticket = buffer.uint32()
-        elif a == 2:
+        elif category == 2:
             self.next_ticket_time_stamp = buffer.uint32()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
 e.decode = function (e, t) {

@@ -3,15 +3,15 @@ from py_mplus.objects.external.banner import Banner
 
 
 class BannerList(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.banner_title = buffer.string()
-        elif a == 2:
+        elif category == 2:
             if not hasattr(self, 'banners'):
                 self.banners = []
             self.banners.append(Banner(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

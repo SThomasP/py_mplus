@@ -3,13 +3,13 @@ from py_mplus.objects.external.transition_action import TransitionAction
 
 
 class Button(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.text = buffer.string()
-        elif a == 2:
+        elif category == 2:
             self.action = TransitionAction(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

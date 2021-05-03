@@ -37,7 +37,7 @@ class SeriesTests(unittest.TestCase):
         self.assertEqual("Akitaka Imakoshi", title.author)
         self.assertTrue(details.is_simul_release)
         self.assertEqual('This title is completed.', details.non_appearance_info)
-        self.assertLessEqual(1764, details.number_of_views)
+        self.assertLessEqual(1625, details.number_of_views)
         self.assertFalse(hasattr(details, 'last_chapters'))
         self.assertTrue(hasattr(details, 'first_chapters'))
         self.assertEqual(33, len(details.first_chapters))

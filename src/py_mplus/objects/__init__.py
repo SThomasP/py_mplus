@@ -84,11 +84,12 @@ class MPObject:
         if n <= len(buffer):
             while buffer.pos < n:
                 i = buffer.uint32()
-                a = rshift(i, 3)
-                self._decode(buffer, a, i)
+                category = rshift(i, 3)
+                skip = 7 & i
+                self._decode(buffer, category, skip)
 
     @abstractmethod
-    def _decode(self, buffer: MPData, a, i):
+    def _decode(self, buffer: MPData, category, skip):
         pass
 
 

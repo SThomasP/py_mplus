@@ -2,13 +2,13 @@ from py_mplus.objects import MPObject
 
 
 class SNS(MPObject):
-    def _decode(self, buffer, a, i):
-        if a == 1:
+    def _decode(self, buffer, category, skip):
+        if category == 1:
             self.body = buffer.string()
-        elif a == 2:
+        elif category == 2:
             self.url = buffer.string()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

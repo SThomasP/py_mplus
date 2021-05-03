@@ -3,15 +3,15 @@ from py_mplus.objects.manga.title import Title
 
 
 class TitleList(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.list_name = buffer.string()
-        elif a == 2:
+        elif category == 2:
             if not hasattr(self, 'featured_titles'):
                 self.featured_titles = []
             self.featured_titles.append(Title(buffer, buffer.uint32()))
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

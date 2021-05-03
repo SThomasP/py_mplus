@@ -3,21 +3,21 @@ from py_mplus.objects.comment.comment_icon import CommentIcon
 
 
 class SettingsView(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             self.my_icon = CommentIcon(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.user_name = buffer.string()
-        elif a == 3:
+        elif category == 3:
             self.notice_of_news_and_events = buffer.boolean()
-        elif a == 4:
+        elif category == 4:
             self.notice_of_updates_of_subscribed_titles = buffer.boolean()
-        elif a == 5:
+        elif category == 5:
             self.english_titles_count = buffer.uint32()
-        elif a == 6:
+        elif category == 6:
             self.spanish_titles_count = buffer.uint32()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 '''

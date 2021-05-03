@@ -5,35 +5,35 @@ from py_mplus.objects.external.sns import SNS
 
 
 class MangaViewer(MPObject):
-    def _decode(self, buffer: MPData, a, i):
-        if a == 1:
+    def _decode(self, buffer: MPData, category, skip):
+        if category == 1:
             if not hasattr(self, 'pages'):
                 self.pages = []
             self.pages.append(Page(buffer, buffer.uint32()))
-        elif a == 2:
+        elif category == 2:
             self.chapter_id = buffer.uint32()
-        elif a == 3:
+        elif category == 3:
             if not hasattr(self, 'chapters'):
                 self.chapters = []
             self.chapters.append(Chapter(buffer, buffer.uint32()))
-        elif a == 4:
+        elif category == 4:
             self.sns_info = SNS(buffer, buffer.uint32())
-        elif a == 5:
+        elif category == 5:
             self.title_name = buffer.string()
-        elif a == 6:
+        elif category == 6:
             self.chapter_name = buffer.string()
-        elif a == 7:
+        elif category == 7:
             self.number_of_comments = buffer.uint32()
-        elif a == 8:
+        elif category == 8:
             self.is_vertical_only = buffer.boolean()
-        elif a == 9:
+        elif category == 9:
             self.title_id = buffer.uint32()
-        elif a == 10:
+        elif category == 10:
             self.start_from_right = buffer.boolean()
-        elif a == 11:
+        elif category == 11:
             self.region_code = buffer.string()
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 '''
 e.decode = function (e, t) {

@@ -11,75 +11,75 @@ RATINGS = ['ALL_AGES', 'TEEN', 'TEEN_PLUS', 'MATURE']
 
 
 class TitleDetailView(MPObject):
-    def _decode(self, buffer, a, i):
-        if a == 1:
+    def _decode(self, buffer, category, skip):
+        if category == 1:
             self.title = Title(buffer, buffer.uint32())
-        elif a == 2:
+        elif category == 2:
             self.image = buffer.string()
-        elif a == 3:
+        elif category == 3:
             self.overview = buffer.string()
-        elif a == 4:
+        elif category == 4:
             self.background_image = buffer.string()
-        elif a == 5:
+        elif category == 5:
             self.next_time_stamp = buffer.uint32()
-        elif a == 6:
+        elif category == 6:
             self.update_timing = buffer.int32()
-        elif a == 7:
+        elif category == 7:
             self.viewing_period_description = buffer.string()
-        elif a == 8:
+        elif category == 8:
             self.non_appearance_info = buffer.string()
-        elif a == 9:
+        elif category == 9:
             if not hasattr(self, 'first_chapters'):
                 self.first_chapters = []
             self.first_chapters.append(Chapter(buffer, buffer.uint32()))
-        elif a == 10:
+        elif category == 10:
             if not hasattr(self, 'last_chapters'):
                 self.last_chapters = []
             self.last_chapters.append(Chapter(buffer, buffer.uint32()))
-        elif a == 11:
+        elif category == 11:
             if not hasattr(self, 'banners'):
                 self.banners = []
             self.banners.append(Banner(buffer, buffer.uint32()))
-        elif a == 12:
+        elif category == 12:
             if not hasattr(self, 'recommended_titles'):
                 self.recommended_titles = []
             self.recommended_titles.append(Title(buffer, buffer.uint32()))
-        elif a == 13:
+        elif category == 13:
             self.sns_info = SNS(buffer, buffer.uint32())
-        elif a == 14:
+        elif category == 14:
             self.is_simul_release = buffer.boolean()
-        elif a == 15:
+        elif category == 15:
             self.is_subscribed = buffer.boolean()
-        elif a == 16:
+        elif category == 16:
             self.rating = buffer.int32()
-        elif a == 17:
+        elif category == 17:
             self.chapters_descending = buffer.boolean()
-        elif a == 18:
+        elif category == 18:
             self.number_of_views = buffer.uint32()
-        elif a == 19:
+        elif category == 19:
             if not hasattr(self, 'publisher_items'):
                 self.publisher_items = []
             self.publisher_items.append(PublisherItem(buffer, buffer.uint32()))
-        elif a == 20:
+        elif category == 20:
             if not hasattr(self, 'title_banners'):
                 self.title_banners = []
             self.title_banners.append(Banner(buffer, buffer.uint32()))
-        elif a == 21:
+        elif category == 21:
             self.user_tickets = UserTickets(buffer, buffer.uint32())
-        elif a == 22:
+        elif category == 22:
             if not hasattr(self, 'ticket_chapters'):
                 self.ticket_chapters = []
             self.ticket_chapters.append(Chapter(buffer, buffer.uint32()))
-        elif a == 23:
+        elif category == 23:
             if not hasattr(self, 'ticket_titles'):
                 self.ticket_titles = []
             self.ticket_titles.append(Title(buffer, buffer.uint32()))
-        elif a == 24:
+        elif category == 24:
             self.has_chapters_between = buffer.boolean()
-        elif a == 25:
+        elif category == 25:
             self.publisher_banner = Banner(buffer, buffer.uint32())
         else:
-            buffer.skip_type(7 & i)
+            buffer.skip_type(skip)
 
 
 
